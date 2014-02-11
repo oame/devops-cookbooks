@@ -1,0 +1,86 @@
+# Prefix
+set-option -g prefix C-t
+unbind C-b
+
+# Options
+set-window-option -g utf8 on
+#set-window-option -g mode-keys vi
+set-window-option -g automatic-rename off
+set-window-option -g mode-mouse on
+
+#set-option -g mouse-resize-pane on
+#set-option -g mouse-select-window on
+set-option -g mouse-select-pane on
+
+# View
+set -g status-interval 5
+set -g status-left-length 100
+set -g status-right-length 50
+
+set-option -g default-terminal "screen-256color"
+set-option -g set-titles on
+set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
+
+# ステータスラインカスタム関連
+set -g status-bg black
+set -g status-fg white
+set -g status-attr dim
+
+set -g status-left '#[fg=green,bold][#20(whoami)@#H]#[default]'
+#set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
+set -g status-right '#[fg=green,bold]#[default]'
+
+set -g message-attr bold
+set -g message-fg white
+set -g message-bg red
+
+set -g pane-active-border-fg white
+set -g pane-active-border-bg black
+
+set-window-option -g mode-bg white
+set-window-option -g mode-fg black
+set-window-option -g window-status-bg black
+set-window-option -g window-status-fg white
+set-window-option -g window-status-current-bg green
+set-window-option -g window-status-current-fg black
+set-window-option -g window-status-current-attr bold
+
+# KeyBindings
+# 直前のウィンドウ
+bind C-q last-window
+
+# 設定リロード
+bind r source-file ~/.tmux.conf
+
+# ウィンドウ選択画面
+bind Space choose-window
+
+# 新ウィンドウ作成
+bind c new-window
+
+# 分割していたペインそれぞれをWindowに
+bind b break-pane
+
+# ペインの縦分割
+bind h split-window -v
+
+# ペインの横分割
+bind v split-window -h
+
+# ペインリサイズ関連vi風
+bind -r C-h resize-pane -L 6
+bind -r C-l resize-pane -R 6
+bind -r C-j resize-pane -D 6
+bind -r C-k resize-pane -U 6
+bind -r s swap-pane -U
+
+# ペイン終了
+bind k kill-pane
+# ウィンドウ終了
+bind K kill-window
+# ペイン番号表示
+bind i display-panes
+# コピーモード突入
+bind y copy-mode
+# ペースト
+#bind p paste-buffer
