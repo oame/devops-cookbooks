@@ -1,0 +1,19 @@
+upstream jenkins_server {
+  server 127.0.0.1:<%= node["jenkins"]["port"] %> fail_timeout=0;
+}
+
+server {
+  listen      80;
+  server_name ci.randompaper.co;
+
+  location / {
+    proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (!-f $request_filename) {
+      proxy_pass http://jenkins_server;
+      break;
+    }
+  }
+}
