@@ -35,6 +35,6 @@ remote_file "#{node['deployer']['home']}/.ssh/authorized_keys" do
   owner     node['deployer']['user']
   group     node['deployer']['group']
   mode      '0644'
-  source    'https://github.com/oame.keys'
+  source    node['deployer']['authorized_keys']
   action    :create_if_missing
 end
