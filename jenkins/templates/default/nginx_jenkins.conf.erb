@@ -4,7 +4,7 @@ upstream jenkins_server {
 
 server {
   listen      80;
-  server_name ci.randompaper.co;
+  server_name <%= node["jenkins"]["host"] %>;
 
   location / {
     proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
