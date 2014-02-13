@@ -1,0 +1,17 @@
+mkdir chef-repo
+bundle init
+cat <<EOD > Gemfile 2>&1
+source 'https://rubygems.org'
+
+gem 'knife-solo'
+gem 'berkshelf'
+EOD
+bundle install --path vendor/bundle --binstubs=.bundle/bin
+yes n | berks init
+rm Thorfile
+knife solo init . 
+echo "cookbook 'yum'" >> Berksfile
+berks install --path cookbooks
+
+rm cookbooks/.gitkeep
+rm nodes/.gitkeep

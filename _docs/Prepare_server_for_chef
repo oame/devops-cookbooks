@@ -1,0 +1,5 @@
+TARGET_ADDR=[Address]
+ssh-copy-id root@$TARGET_ADDR -p 22
+
+knife solo prepare root@$TARGET_ADDR -p 22
+knife solo cook root@$TARGET_ADDR -p 22

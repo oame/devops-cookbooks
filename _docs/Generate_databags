@@ -1,0 +1,9 @@
+# Create data_bag
+knife solo data bag create users oame --json '{"id": "oame", "group": "oame", "shell": "/bin/zsh", "password": "", "key": "ssh-rsa"}'
+
+# Create encrypted data_bag
+echo 'encrypted_data_bag_secret "./data_bag_key/secret_key"' >> .chef/knife.rb
+mkdir data_bag_key
+openssl rand -base64 512 > data_bag_key/secret_key
+
+knife solo data bag show users oame --secret-file ./data_bag_key/secret_key -F json

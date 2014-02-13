@@ -1,0 +1,20 @@
+# 初期設定
+# 前もってVirtualBoxのインストールが必要
+gem install vagrant
+git clone git@bitbucket.org:oame/floe-net-chef.git
+cd floe-net-chef
+bundle install --path vendor/bundle --binstubs=.bundle/bin
+vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-omnibus
+vagrant plugin install sahara
+vagrant up
+vagrant ssh-config --host centos >> ./sshconfig
+
+# サンドボックスにSSH
+ssh -F ./sshconfig centos
+
+# 仮想サーバーに対してレシピを実行する
+vim Berksfile     # クックブックを追加
+vim Vagrantfile   # run_listに追記
+berks install --path cookbooks
+vagrant provision # 実行

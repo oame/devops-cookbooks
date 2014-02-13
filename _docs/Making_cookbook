@@ -1,0 +1,2 @@
+knife cookbook create [cookbook_name] -o site-cookbooks
+knife cookbook test [cookbook_name]
