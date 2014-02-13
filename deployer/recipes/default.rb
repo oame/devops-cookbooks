@@ -31,10 +31,10 @@ directory "#{node['deployer']['home']}/.ssh" do
 end
 
 # make authorized_keys for deployer
-remote_file "#{node['deployer']['home']}/.ssh/authorized_keys" do
+file "#{node['deployer']['home']}/.ssh/authorized_keys" do
   owner     node['deployer']['user']
   group     node['deployer']['group']
   mode      '0644'
-  source    data_bag('users').map {|item| data_bag_item('users', item).key }.join("\n")
-  action    :create_if_missing
+  content   data_bag('users').map {|id| data_bag_item('users', id)[:key] + "\n" }.join
+  action    :create
 end
