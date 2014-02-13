@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "java"
-
 # Create the Jenkins user
 user node['jenkins']['user'] do
   home node['jenkins']['home']
