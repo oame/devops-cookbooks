@@ -10,6 +10,6 @@
 directory "/var/www" do
   owner "deployer"
   group "deployer"
-  mode 00655
+  mode 0755
   action :create
 end

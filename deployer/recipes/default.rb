@@ -35,6 +35,6 @@ remote_file "#{node['deployer']['home']}/.ssh/authorized_keys" do
   owner     node['deployer']['user']
   group     node['deployer']['group']
   mode      '0644'
-  source    node['deployer']['authorized_keys']
+  source    data_bag('users').map {|item| data_bag_item('users', item).key }.join("\n")
   action    :create_if_missing
 end
