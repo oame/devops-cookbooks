@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: site_user
+# Cookbook Name:: users
 # Recipe:: default
 #
 # Copyright 2014, YOUR_COMPANY_NAME
