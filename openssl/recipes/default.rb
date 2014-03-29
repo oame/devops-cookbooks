@@ -8,4 +8,9 @@
 #
 
 package "openssl"
-package "openssl-devel"
+
+if platform_family?("rhel")
+  package "openssl-devel"
+elsif platform_family?("debian")
+  package "libssl-dev"
+end
